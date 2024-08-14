@@ -62,3 +62,22 @@ ADD FOREIGN KEY (attachment_id) REFERENCES attachments(id);
 
 ALTER TABLE messages
 ADD FOREIGN KEY (chat_room_id) REFERENCES chat_rooms(id);
+
+-- Insert sample data (replace the user ids first)
+INSERT INTO chat_rooms (id, last_message_id, unread_count)
+VALUES
+('8d162274-6cb8-4776-815a-8e721ebfb76d', NULL, 0);
+
+INSERT INTO messages (id, chat_room_id, sender_user_id, receiver_user_id, content, created_at)
+VALUES
+('29829a84-30b9-47e9-b6df-515819843f7d', '8d162274-6cb8-4776-815a-8e721ebfb76d', 'c926f70e-2085-4991-b8a0-b43236cc77a8', '0db9987d-ef95-41f8-9c8f-efd499769bab', 'Du.. SUH', '2024-08-14 16:20:42',),
+('de120f3a-dbca-4330-9e2e-18b55a2fb9e5', '8d162274-6cb8-4776-815a-8e721ebfb76d', '0db9987d-ef95-41f8-9c8f-efd499769bab', 'c926f70e-2085-4991-b8a0-b43236cc77a8', 'Suh du', '2024-08-14 16:20:00',);
+
+INSERT INTO chat_room_participants (chat_room_id, participant_id)
+VALUES 
+('8d162274-6cb8-4776-815a-8e721ebfb76d', '0db9987d-ef95-41f8-9c8f-efd499769bab'),
+('8d162274-6cb8-4776-815a-8e721ebfb76d', '0db9987d-ef95-41f8-9c8f-efd499769bab');
+
+UPDATE chat_rooms 
+SET last_message_id = '29829a84-30b9-47e9-b6df-515819843f7d'
+WHERE id = '8d162274-6cb8-4776-815a-8e721ebfb76d';

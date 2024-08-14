@@ -24,7 +24,7 @@ Future<Response> _get(RequestContext context, String chatRoomId) async {
   final messageRepository = context.read<MessageRepository>();
 
   try {
-    final messages = messageRepository.fetchMessages(chatRoomId);
+    final messages = await messageRepository.fetchMessages(chatRoomId);
     return Response.json(
       body: {
         'messages': messages,
