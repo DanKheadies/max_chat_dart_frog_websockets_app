@@ -42,8 +42,7 @@ class User extends Equatable {
       username: json['username'] ?? '',
       phone: json['phone'] ?? '',
       email: json['email'] ?? '',
-      avatarUrl:
-          json['avatar_url'] ?? 'https://source.unsplash.com/random/?profile',
+      avatarUrl: json['avatar_url'] ?? 'https://i.pravatar.cc/300',
       status: json['status'] ?? '',
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:max_chat_dart_frog_websockets_app/screens/screens.dart';
 import 'package:models/models.dart';
 
 void main() {
@@ -33,8 +34,7 @@ final chatRoom = ChatRoom(
       username: 'User 1',
       phone: '1234512345',
       email: 'user1@email.com',
-      avatarUrl:
-          'https://www.pexels.com/photo/autumn-leaves-around-bench-in-park-19962749/',
+      avatarUrl: 'https://i.pravatar.cc/300',
       status: 'online',
     ),
     User(
@@ -42,8 +42,7 @@ final chatRoom = ChatRoom(
       username: 'User 2',
       phone: '5432154321',
       email: 'user2@email.com',
-      avatarUrl:
-          'https://www.pexels.com/photo/colorful-wall-on-beach-14016396/',
+      avatarUrl: 'https://i.pravatar.cc/300',
       status: 'online',
     ),
   ],
@@ -60,7 +59,19 @@ final chatRoom = ChatRoom(
 
 final messages = [
   Message(
-    id: 'de120f3a-dbca-4330-9e2e-18b55a2fb9ef',
-    chatRoomid: 
+    id: 'de120f3a-dbca-4330-9e2e-18b55a2fb9e5',
+    chatRoomId: '8d162274-6cb8-4776-815a-8e721ebfb76d',
+    senderUserId: userId1,
+    receiverUserId: userId2,
+    content: 'Hey! I am good, thanks.',
+    createdAt: DateTime(2023, 12, 1, 1, 0, 10),
+  ),
+  Message(
+    id: '18b55a2fb9e5-de120f3a-dbca-4330-9e2e',
+    chatRoomId: '8d162274-6cb8-4776-815a-8e721ebfb76d',
+    senderUserId: userId2,
+    receiverUserId: userId1,
+    content: 'Hi, how are you?',
+    createdAt: DateTime(2023, 12, 1, 1, 0, 0),
   ),
 ];
