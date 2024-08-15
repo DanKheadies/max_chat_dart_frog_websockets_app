@@ -61,6 +61,7 @@ class Message extends Equatable {
       'sender_user_id': senderUserId,
       'receiver_user_id': receiverUserId,
       'content': content,
+      // 'attachment': attachment?.toJson(),
       'created_at': createdAt.toIso8601String(),
     };
   }

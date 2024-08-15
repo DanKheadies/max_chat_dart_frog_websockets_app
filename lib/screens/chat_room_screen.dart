@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:max_chat_dart_frog_websockets_app/main.dart';
+// import 'package:max_chat_dart_frog_websockets_app/repositories/repositories.dart';
 import 'package:max_chat_dart_frog_websockets_app/widgets/widgets.dart';
 import 'package:models/models.dart';
 
@@ -22,6 +23,17 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   void initState() {
     _loadMessages();
+    _startWebSocket();
+
+    messageRepository.subscribeToMessageUpdates((messageData) {
+      final message = Message.fromJson(messageData);
+      if (message.chatRoomId == widget.chatRoom.id) {
+        messages.add(message);
+        messages.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        setState(() {});
+      }
+    });
+
     super.initState();
   }
 
@@ -38,6 +50,35 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     setState(() {
       messages.addAll(_messages);
     });
+  }
+
+  void _sendMessage() async {
+    print('sending message...');
+    final message = Message(
+      chatRoomId: widget.chatRoom.id,
+      senderUserId: userId1,
+      receiverUserId: userId2,
+      content: messageController.text,
+      // attachment: Attachment.sampleData[0],
+      createdAt: DateTime.now(),
+    );
+
+    // setState(() {
+    //   messages.add(message);
+    // });
+
+    await messageRepository.createMessage(message);
+
+    messageController.clear();
+  }
+
+  _startWebSocket() {
+    webSocketClient.connect(
+      'ws://localhost:8080/ws',
+      {
+        'Authorization': 'Bearer ....',
+      },
+    );
   }
 
   @override
@@ -144,7 +185,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                         ),
                         suffixIcon: IconButton(
                           onPressed: () {
-                            // TODO: Send a message and clear the controller
+                            _sendMessage();
                           },
                           icon: const Icon(Icons.send),
                         ),

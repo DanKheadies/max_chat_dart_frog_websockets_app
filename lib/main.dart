@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:max_chat_dart_frog_websockets_app/repositories/message_repository.dart';
 import 'package:max_chat_dart_frog_websockets_app/screens/screens.dart';
 import 'package:max_chat_dart_frog_websockets_app/services/api_client.dart';
+import 'package:max_chat_dart_frog_websockets_app/services/websocket_client.dart';
 import 'package:models/models.dart';
 
 final ApiClient apiClient = ApiClient(
@@ -11,7 +12,11 @@ final ApiClient apiClient = ApiClient(
   },
 );
 
-final messageRepository = MessageRepository(apiClient: apiClient);
+final webSocketClient = WebSocketClient();
+final messageRepository = MessageRepository(
+  apiClient: apiClient,
+  webSocketClient: webSocketClient,
+);
 
 void main() {
   runApp(const MyApp());
